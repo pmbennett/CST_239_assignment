@@ -14,8 +14,10 @@ public class Storefront {
      * Adds the initial inventory for the store, when initialized. 
      */
     private static void initializeStore() { 
-        Product sword = new Product("Infinity Sword", "A sword with an infinite sharpness.", 150.00, 5);
-        inventory.add(sword); //Store only sells one item for now. 
+        Weapon sword = new Weapon("Infinity Sword", "A sword with an infinite sharpness.", 150.00, 5, 20);
+        Weapon tomohawk = new Weapon("Tomohawk", "A throwable weapon. It's like a hatchet, but it's not.", 75.00, 5, 10);
+        inventory.add(sword);
+        inventory.add(tomohawk); 
     }
     /**
      * Shows available inventory to the player, displaying product name and description, as well as price and quantity available for sale.
@@ -63,9 +65,9 @@ public class Storefront {
         int purchaseQty = scanner.nextInt();
         for (int i = 0; i < inventory.size(); i++) {
             if (userinput == i && purchaseQty<=inventory.get(i).getQty()){
-                System.out.print("You have selected " + purchaseQty + " units of " + inventory.get(i).getName()
+                System.out.println("You have selected " + purchaseQty + " units of " + inventory.get(i).getName()
                         + "; confirm purchase? (Enter 'Y' to confirm or 'N' to cancel)");
-            } else if(purchaseQty>inventory.get(i).getQty()){ //executes if user attempts to purchase more than the store has available
+            } else if(userinput == i && purchaseQty>inventory.get(i).getQty()){ //executes if user attempts to purchase more than the store has available
                 System.out.println("Quantity requested is more than current available stock. Please try again, and request a quantity no higher than "+inventory.get(i).getQty()+ ".");
                 break;
             } else{
