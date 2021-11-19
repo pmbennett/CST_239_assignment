@@ -15,9 +15,16 @@ public class Storefront {
      */
     private static void initializeStore() { 
         Weapon sword = new Weapon("Infinity Sword", "A sword with an infinite sharpness.", 150.00, 5, 20);
-        Weapon tomohawk = new Weapon("Tomohawk", "A throwable weapon. It's like a hatchet, but it's not.", 75.00, 5, 10);
+        Weapon tomahawk = new Weapon("Tomahawk", "A throwable weapon. It's like a hatchet, but it's not.", 75.00, 5, 10);
+        Armor chestPlate = new Armor("Chestplate", "A standard chestplate to protect...you know, what's in your chest.", 50, 3, 30);
+        Armor helmet = new Armor("Helmet", "It goes on your head, and protects...well...whatever it is you've got in there.", 50, 3, 30);
+        Health regenPotion = new Health("Health Potion", "Regenerates health lost from taking on fights.", 40, 2, 50);
+
         inventory.add(sword);
-        inventory.add(tomohawk); 
+        inventory.add(tomahawk); 
+        inventory.add(chestPlate);
+        inventory.add(helmet);
+        inventory.add(regenPotion);
     }
     /**
      * Shows available inventory to the player, displaying product name and description, as well as price and quantity available for sale.
@@ -70,13 +77,13 @@ public class Storefront {
             } else if(userinput == i && purchaseQty>inventory.get(i).getQty()){ //executes if user attempts to purchase more than the store has available
                 System.out.println("Quantity requested is more than current available stock. Please try again, and request a quantity no higher than "+inventory.get(i).getQty()+ ".");
                 break;
-            } else{
-                break;
+            } else {
+                continue;
             }
+            
 
             /*User purchase confirmation block. Note usage of .equalsIgnoreCase(),
             preventing lowercase entry from causing issues.*/
-
             String userConf = scanner.next();
            
             if (userConf.equalsIgnoreCase("Y")) {

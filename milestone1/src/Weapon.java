@@ -1,5 +1,5 @@
 public class Weapon extends Product {
-    private int damage;
+    private int damage; //add setter and getter
 
     public Weapon() {
 

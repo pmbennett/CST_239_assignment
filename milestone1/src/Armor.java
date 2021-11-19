@@ -1,6 +1,6 @@
 public class Armor extends Product {
 
-    private int protection;
+    private int protection; //add setter and getter 
     public Armor(){
 
     }
