@@ -5,8 +5,8 @@ import java.util.Scanner;
  * including product information such as the name, description, and price of the product for sale. It also 
  * supports the sale of a product to a user, requiring confirmation for all purchases.
  * @author Paul Bennett
- * @version 1.0
- * @since 11/14/2021
+ * @version 1.1
+ * @since 11/19/2021
  */
 public class Storefront {
     private static ArrayList<Product> inventory = new ArrayList<Product>(); //initializes an ArrayList of type product for holding store inventory
