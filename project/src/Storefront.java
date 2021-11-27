@@ -17,7 +17,9 @@ public class Storefront {
 
     public static void main(String[] args) {
         InventoryManager inv = new InventoryManager();
+        ShoppingCart cart = new ShoppingCart();
         inv.initializeStore();
+        cart.getInitialQty(inv.inventory);
         Scanner scan = new Scanner(System.in);
         int userChoice = 100;
         System.out.println("Welcome to the Trading Post! Please select an option: ");

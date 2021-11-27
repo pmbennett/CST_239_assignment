@@ -13,12 +13,13 @@ import java.util.Scanner;
  */
 
 public class InventoryManager {
-    private ArrayList<Product> inventory = new ArrayList<Product>(); // initializes an ArrayList of type product
+    public ArrayList<Product> inventory = new ArrayList<Product>(); // initializes an ArrayList of type product
                                                                             // for holding store inventory
 
-    /**
+     /**
      * Adds the initial inventory for the store, when initialized.
      */
+    ShoppingCart cart = new ShoppingCart();
     public void initializeStore() {
 
         Weapon sword = new Weapon("Infinity Sword", "A sword with an infinite sharpness.", 150.00, 5, 20);
@@ -65,7 +66,9 @@ public class InventoryManager {
     public void purchaseProduct() {
         /****************** This segment is where the user selects the product to purchase**********************/
         Scanner scanner = new Scanner(System.in);
+        boolean keepShopping = true;
         System.out.println("Please select a product to purchase: ");
+       while(keepShopping == true){
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).getQty() > 0) {
                 System.out.println("To purchase " + inventory.get(i).getName() + " please press " + i + "."); //prints all available choices
@@ -84,8 +87,8 @@ public class InventoryManager {
         int purchaseQty = scanner.nextInt();
         for (int i = 0; i < inventory.size(); i++) {
             if (userinput == i && purchaseQty<=inventory.get(i).getQty()){
-                System.out.println("You have selected " + purchaseQty + " units of " + inventory.get(i).getName()
-                        + "; confirm purchase? (Enter 'Y' to confirm or 'N' to cancel)");
+                cart.addToCart(inventory, i, purchaseQty);
+                System.out.println("Cart now contains " + purchaseQty + " unit(s) of " + inventory.get(i).getName() + ", keep shopping? (Y for yes, N for no)");
             } else if(userinput == i && purchaseQty>inventory.get(i).getQty()){ //executes if user attempts to purchase more than the store has available
                 System.out.println("Quantity requested is more than current available stock. Please try again, and request a quantity no higher than "+inventory.get(i).getQty()+ ".");
                 break;
@@ -99,13 +102,14 @@ public class InventoryManager {
             String userConf = scanner.next();
            
             if (userConf.equalsIgnoreCase("Y")) {
-                System.out.println("Purchase confirmed, thank you!");
-                inventory.get(i).updateQty(-purchaseQty);
-                return;
+               keepShopping = true;
+                //inventory.get(i).updateQty(-purchaseQty);
+                break;
             } else if (userConf.equalsIgnoreCase("N")) { //If user cancels purchase, this message will display 
-                System.out.println("Purchase canceled.");
-                return;
+                keepShopping = false;
+               break;
             }
         }
     }
+}
 }
