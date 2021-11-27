@@ -101,11 +101,10 @@ public class InventoryManager {
             preventing lowercase entry from causing issues.*/
             String userConf = scanner.next();
            
-            if (userConf.equalsIgnoreCase("Y")) {
+            if (userConf.equalsIgnoreCase("Y")) { //This option allows the user to keep shopping 
                keepShopping = true;
-                //inventory.get(i).updateQty(-purchaseQty);
                 break;
-            } else if (userConf.equalsIgnoreCase("N")) { //If user cancels purchase, this message will display 
+            } else if (userConf.equalsIgnoreCase("N")) { //This option takes user back to the main menu 
                 keepShopping = false;
                break;
             }

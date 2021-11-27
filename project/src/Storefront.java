@@ -18,15 +18,16 @@ public class Storefront {
     public static void main(String[] args) {
         InventoryManager inv = new InventoryManager();
         ShoppingCart cart = new ShoppingCart();
+        cart.setInitialQty(inv.inventory);
         inv.initializeStore();
-        cart.getInitialQty(inv.inventory);
         Scanner scan = new Scanner(System.in);
         int userChoice = 100;
         System.out.println("Welcome to the Trading Post! Please select an option: ");
         while (userChoice != 0) {
             System.out.println("Press 1 to view available inventory.");
             System.out.println("Press 2 to purchase a product.");
-            System.out.println("Press 3 to exit.");
+            System.out.println("Press 3 to view cart.");
+            System.out.println("Press 4 to exit.");
 
             /*
              * This switch statment powers the storefront, more or less.
@@ -43,6 +44,9 @@ public class Storefront {
                     inv.purchaseProduct();
                     break;
                 case 3:
+                    cart.showCart(inv.inventory, inv.cart);
+                    break;
+                case 4:
                     System.out.println("Thanks for visiting!");
                     return;
 
