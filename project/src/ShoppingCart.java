@@ -28,10 +28,17 @@ public class ShoppingCart {
     public void showCart(ArrayList<Product> p, ShoppingCart cart) {
         System.out.println("Cart contains the following items: ");
         for (int i = 0; i < p.size(); i++) {
-           // if (cartQty[i] > 0) {
-                String tempName = p.get(i).getName();
-                System.out.println(cart.cartQty[i] + " unit(s) of " + tempName);
-           //}
+            String tempName = p.get(i).getName();
+            System.out.println(cart.cartQty[i] + " unit(s) of " + tempName);
         }
+    }
+
+    public void emptyCart(ArrayList<Product> p, ShoppingCart cart) {
+        for (int i = 0; i < cart.cartQty.length; i++) {
+            Product temp = p.get(i);
+            temp.updateQty(cart.cartQty[i]);
+            cart.cartQty[i] = 0;
+        }
+        System.out.println("Cart emtpied.");
     }
 }

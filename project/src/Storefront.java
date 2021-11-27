@@ -26,8 +26,10 @@ public class Storefront {
         while (userChoice != 0) {
             System.out.println("Press 1 to view available inventory.");
             System.out.println("Press 2 to purchase a product.");
-            System.out.println("Press 3 to view cart.");
-            System.out.println("Press 4 to exit.");
+            System.out.println("Press 3 to return a product.");
+            System.out.println("Press 4 to see contents of cart.");
+            System.out.println("Press 5 to empty cart.");
+            System.out.println("Press 6 to exit.");
 
             /*
              * This switch statment powers the storefront, more or less.
@@ -44,9 +46,15 @@ public class Storefront {
                     inv.purchaseProduct();
                     break;
                 case 3:
-                    cart.showCart(inv.inventory, inv.cart);
+                    inv.returnProduct();
                     break;
                 case 4:
+                    cart.showCart(inv.inventory, inv.cart);
+                    break;
+                case 5: 
+                    cart.emptyCart(inv.inventory, inv.cart);
+                    break;
+                case 6:
                     System.out.println("Thanks for visiting!");
                     return;
 
