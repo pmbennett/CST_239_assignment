@@ -61,12 +61,9 @@ public class InventoryManager {
 
     /**
      * Guides the user through purchasing a product by displaying options and
-     * requesting user input.
-     * Safeguard is provided so user cannot purchase more than available on hand.
-     * Attempting to do so will
-     * end the method and revert back to the main menu. After user has made a
-     * selection, confirmation will be required.
-     * If the user does not confirm, the purchase will be canceled.
+     * requesting user input. Safeguard is provided so user cannot purchase more than available on hand.
+     * Attempting to do so will end the method and revert back to the main menu. After user has made a
+     * selection, confirmation will be required. If the user does not confirm, the purchase will be canceled.
      */
     public void purchaseProduct() {
         /******************
@@ -129,11 +126,13 @@ public class InventoryManager {
             }
         }
     }
-
+    /**
+     * Initiates and completes the return of a product from the shopping cart. 
+     * Safeguards are in place to prevent user from returning more of any given
+     * product than they have in their shopping cart. 
+     */
     public void returnProduct() {
-        /******************
-         * This segment is where the user selects the product to return
-         **********************/
+        /******************* This segment is where the user selects the product to return**********************/
         Scanner scanner = new Scanner(System.in);
         boolean keepReturning = true;
         System.out.println("Please select a product to return: ");
@@ -146,10 +145,8 @@ public class InventoryManager {
 
             /*
              * Here, the user is prompted to enter the quantity they wish to return of their
-             * selected item.
-             * After this, the item is removed from the cart and they are prompted to
-             * confirm if they
-             * wish to return anything else or return to the main menu.
+             * selected item. After this, the item is removed from the cart and they are prompted to
+             * confirm if they wish to return anything else or return to the main menu.
              */
             int userinput = scanner.nextInt();
 
