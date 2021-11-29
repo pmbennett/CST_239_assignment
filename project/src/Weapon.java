@@ -9,7 +9,7 @@
  * 
  * @see Product
  */
-public class Weapon extends Product {
+public class Weapon extends Product implements Comparable<Product> {
 
     private int damage;
 
@@ -51,5 +51,15 @@ public class Weapon extends Product {
      */
     public int getDamage() {
         return damage;
+    }
+
+    /**
+     * Compares the product with another product by name, in alphabetical order.
+     * Ignores letter case. For use with an array sorting algorithm.
+     */
+    @Override
+    public int compareTo(Product o) {
+        int nameComp = this.getName().compareToIgnoreCase(o.getName());
+        return nameComp;
     }
 }

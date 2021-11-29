@@ -9,7 +9,7 @@
  * 
  * @see Product
  */
-public class Armor extends Product {
+public class Armor extends Product implements Comparable<Product> {
 
     private int protection;
 
@@ -52,5 +52,15 @@ public class Armor extends Product {
      */
     public int getProtection() {
         return protection;
+    }
+
+    /**
+     * Compares the product with another product by name, in alphabetical order.
+     * Ignores letter case. For use with an array sorting algorithm.
+     */
+    @Override
+    public int compareTo(Product o) {
+        int nameComp = this.getName().compareToIgnoreCase(o.getName());
+        return nameComp;
     }
 }

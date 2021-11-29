@@ -1,4 +1,4 @@
-public class Health extends Product {
+public class Health extends Product implements Comparable<Product> {
     /**
      * Extends the product class, adding a "healthRegen" field to represent the
      * health restored by the potion. Chains Product constructor to allow for
@@ -50,5 +50,14 @@ public class Health extends Product {
      */
     public int getHealthRegen() {
         return healthRegen;
+    }
+    /**
+     * Compares the product with another product by name, in alphabetical order.
+     * Ignores letter case. For use with an array sorting algorithm. 
+     */
+    @Override
+    public int compareTo(Product o) {
+        int nameComp = this.getName().compareToIgnoreCase(o.getName());
+        return nameComp;
     }
 }
