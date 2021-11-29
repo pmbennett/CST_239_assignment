@@ -16,11 +16,11 @@ public class InventoryManager {
     public ArrayList<Product> inventory = new ArrayList<Product>(); // initializes an ArrayList of type product
                                                                     // for holding store inventory
 
-    /**
+   
+    ShoppingCart cart = new ShoppingCart();
+     /**
      * Adds the initial inventory for the store, when initialized.
      */
-    ShoppingCart cart = new ShoppingCart();
-
     public void initializeStore() {
 
         Weapon sword = new Weapon("Infinity Sword", "A sword with an infinite sharpness.", 150.00, 5, 20);

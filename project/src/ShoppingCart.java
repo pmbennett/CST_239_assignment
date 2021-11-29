@@ -29,7 +29,7 @@ public class ShoppingCart {
      * 
      * @param p The Product ArrayList representing store inventory.
      * @param index The index of the product being added to the cart.
-     * @param q Quantity to add to the car. 
+     * @param q Quantity to add to the cart. 
      */
     public void addToCart(ArrayList<Product> p, int index, int q) {
         Product temp = p.get(index);
@@ -43,7 +43,7 @@ public class ShoppingCart {
      * 
      * @param p The Product ArrayList representing store inventory.
      * @param index The index of the product being removed to the cart.
-     * @param q Quantity to remove to the car. 
+     * @param q Quantity to remove from the cart. 
      */
     public void returnFromCart(ArrayList<Product> p, int index, int q) {
         Product temp = p.get(index);

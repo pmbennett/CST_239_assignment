@@ -1,5 +1,4 @@
-public class Health extends Product implements Comparable<Product> {
-    /**
+ /**
      * Extends the product class, adding a "healthRegen" field to represent the
      * health restored by the potion. Chains Product constructor to allow for
      * healthRegen field to be initialized from constructor.
@@ -10,6 +9,9 @@ public class Health extends Product implements Comparable<Product> {
      * 
      * @see Product
      */
+    
+public class Health extends Product implements Comparable<Product> {
+   
     private int healthRegen;
 
     /**
