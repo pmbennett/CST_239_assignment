@@ -79,6 +79,6 @@ public class ShoppingCart {
             temp.updateQty(cart.cartQty[i]);
             cart.cartQty[i] = 0;
         }
-        System.out.println("Cart emtpied.");
+        System.out.println("Cart emptied.");
     }
 }
