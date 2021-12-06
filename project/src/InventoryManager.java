@@ -24,6 +24,8 @@ public class InventoryManager {
      /**
      * Adds the initial inventory for the store, when initialized.
      * Reads from JSON file to do so. 
+     * 
+     * @param filename The name of the JSON file from which to read, to initialize inventory. 
      */
     public void initializeStore(String filename) throws IOException {
         
