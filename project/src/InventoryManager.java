@@ -1,16 +1,18 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Inventory manager allows users to view saleable inventory,
- * including product information such as the name, description, and price of the
- * product for sale. It also supports the sale of a product to a user, requiring
- * confirmation for all purchases.
+ * The inventory manager is the backbone of the store. It is responsible for 
+ * the initialization of the inventory (by reading from a JSON file). 
+ * It also allows users to purchase and return products, through integration 
+ * with the Shopping Cart.
  * 
  * @author Paul Bennett
- * @version 1.0
- * @since 11/28/2021
+ * @version 1.1
+ * @since 12/5/2021
  */
 
 public class InventoryManager {
@@ -21,23 +23,28 @@ public class InventoryManager {
     ShoppingCart cart = new ShoppingCart();
      /**
      * Adds the initial inventory for the store, when initialized.
+     * Reads from JSON file to do so. 
      */
-    public void initializeStore() {
+    public void initializeStore(String filename) throws IOException {
+        
+        File file = new File(filename);
+        Scanner scan = new Scanner(file);
 
-        Weapon sword = new Weapon("Infinity Sword", "A sword with an infinite sharpness.", 150.00, 5, 20);
-        Weapon tomahawk = new Weapon("Tomahawk", "A throwable weapon. It's like a hatchet, but it's not.", 75.00, 5,
-                10);
-        Armor chestPlate = new Armor("Chestplate", "A standard chestplate to protect...you know, what's in your chest.",
-                50.00, 3, 30);
-        Armor helmet = new Armor("Helmet",
-                "It goes on your head, and protects...well...whatever it is you've got in there.", 50.00, 3, 30);
-        Health regenPotion = new Health("Health Potion", "Regenerates health lost from taking on fights.", 40.00, 2, 50);
-
-        inventory.add(sword);
-        inventory.add(tomahawk);
-        inventory.add(chestPlate);
-        inventory.add(helmet);
-        inventory.add(regenPotion);
+        while (scan.hasNext()) {
+            String json = scan.nextLine();
+            ObjectMapper mapper = new ObjectMapper();
+            if (json.contains("damage")) {
+                Weapon item = mapper.readValue(json, Weapon.class);
+                inventory.add(item);
+            } else if (json.contains("protection")) {
+                Armor item = mapper.readValue(json, Armor.class);
+                inventory.add(item);
+            } else if (json.contains("healthRegen")) {
+                Health item = mapper.readValue(json, Health.class);
+                inventory.add(item);
+            }
+        }
+        scan.close();
     }
 
     /**

@@ -1,16 +1,15 @@
 import java.util.Scanner;
+import java.io.IOException;
 
 /**
  * This is the driving class behind the storefront application. This allows
- * users to view saleable inventory,
- * including product information such as the name, description, and price of the
- * product for sale. It also
- * supports the sale of a product to a user, requiring confirmation for all
- * purchases.
+ * users to view saleable inventory, including product information such as the name,
+ * description, and price of the product for sale, as well as any item type-specific properties.
+ * It also supports the sale of a product to a user.
  * 
  * @author Paul Bennett
- * @version 1.2
- * @since 11/28/2021
+ * @version 1.3
+ * @since 12/5/2021
  */
 public class Storefront {
 
@@ -18,7 +17,11 @@ public class Storefront {
         InventoryManager inv = new InventoryManager();
         ShoppingCart cart = new ShoppingCart();
         cart.setInitialQty(inv.inventory);
-        inv.initializeStore();
+        try {
+          inv.initializeStore("inventory.json");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         Scanner scan = new Scanner(System.in);
         int userChoice = 100;
         System.out.println("Welcome to the Trading Post! Please select an option: ");

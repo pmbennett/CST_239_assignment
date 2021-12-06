@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * A product that is salable through the StoreFront application, and contains
  * basic information that a customer needs to make buying decisions.
@@ -7,7 +9,7 @@
  * @since 11/14/2021
  */
 
-public class Product {
+public class Product implements Serializable{
     private String name = "null";
     private String desc = "null"; // a description of the product
     private double price = 0.00;

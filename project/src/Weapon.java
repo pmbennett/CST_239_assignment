@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * Extends the product class, adding a "damage" field to represent the damage
  * given by the weapon. Chains Weapon constructor to allow for damage field to
