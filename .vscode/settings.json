@@ -1,5 +1,13 @@
 {
     "java.project.sourcePaths": [
         "project\\src"
-    ]
+    ],
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "jackson-annotations-2.13.0.jar",
+            "jackson-core-2.13.0.jar",
+            "jackson-databind-2.13.0.jar"
+        ],
+    }
 }

@@ -1,0 +1,5 @@
+[{"name": "Infinity Sword", "desc": "A sword with an infinite sharpness.", "price": 150.00, "qty": 5, "damage": 20},
+{"name": "Tomahawk", "desc": "A throwable weapon. It's like a hatchet, but it's not.", "price": 75.00, "qty": 5, "damage": 20},
+{"name": "Chestplate", "desc": "A standard chestplate to protect...you know, what's in your chest.", "price": 50.00, "qty": 3, "protection": 30},
+{"name": "Helmet", "desc": "It goes on your head, and protects...well...whatever it is you've got in there.", "price": 50.00, "qty": 3, "protection": 30},
+{"name": "Health Potion", "desc": "Regenerates health lost from taking on fights.", "price": 40.00, "qty": 2, "healthRegen": 50}]

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Inventory manager allows users to view saleable inventory,
@@ -27,10 +28,10 @@ public class InventoryManager {
         Weapon tomahawk = new Weapon("Tomahawk", "A throwable weapon. It's like a hatchet, but it's not.", 75.00, 5,
                 10);
         Armor chestPlate = new Armor("Chestplate", "A standard chestplate to protect...you know, what's in your chest.",
-                50, 3, 30);
+                50.00, 3, 30);
         Armor helmet = new Armor("Helmet",
-                "It goes on your head, and protects...well...whatever it is you've got in there.", 50, 3, 30);
-        Health regenPotion = new Health("Health Potion", "Regenerates health lost from taking on fights.", 40, 2, 50);
+                "It goes on your head, and protects...well...whatever it is you've got in there.", 50.00, 3, 30);
+        Health regenPotion = new Health("Health Potion", "Regenerates health lost from taking on fights.", 40.00, 2, 50);
 
         inventory.add(sword);
         inventory.add(tomahawk);
