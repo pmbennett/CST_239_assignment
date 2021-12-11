@@ -16,12 +16,19 @@ public class Storefront {
     public static void main(String[] args) {
         InventoryManager inv = new InventoryManager();
         ShoppingCart cart = new ShoppingCart();
-        cart.setInitialQty(inv.inventory);
         try {
           inv.initializeStore("inventory.json");
         } catch (IOException ex) {
             ex.printStackTrace();
+            System.out.println("An error has occurred initializing inventory. Please try again.");
         }
+
+        try {
+            cart.initializeCart("inventory.json");
+          } catch (IOException ex) {
+              ex.printStackTrace();
+              System.out.println("An error has occurred initializing cart. Please try again.");
+          }
         Scanner scan = new Scanner(System.in);
         int userChoice = 100;
         System.out.println("Welcome to the Trading Post! Please select an option: ");
@@ -45,16 +52,16 @@ public class Storefront {
                     inv.displayInventory();
                     break;
                 case 2:
-                    inv.purchaseProduct();
+                    inv.purchaseProduct(cart);
                     break;
                 case 3:
-                    inv.returnProduct();
+                    inv.returnProduct(cart);
                     break;
                 case 4:
-                    cart.showCart(inv.inventory, inv.cart);
+                    cart.showCart(inv.inventory, cart);
                     break;
                 case 5: 
-                    cart.emptyCart(inv.inventory, inv.cart);
+                    cart.emptyCart(inv.inventory, cart);
                     break;
                 case 6:
                     System.out.println("Thanks for visiting!");

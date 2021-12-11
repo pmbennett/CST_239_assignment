@@ -1,6 +1,6 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Scanner;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -20,7 +20,6 @@ public class InventoryManager {
                                                                     // for holding store inventory
 
    
-    ShoppingCart cart = new ShoppingCart();
      /**
      * Adds the initial inventory for the store, when initialized.
      * Reads from JSON file to do so. 
@@ -74,8 +73,10 @@ public class InventoryManager {
      * requesting user input. Safeguard is provided so user cannot purchase more than available on hand.
      * Attempting to do so will end the method and revert back to the main menu. After user has made a
      * selection, confirmation will be required. If the user does not confirm, the purchase will be canceled.
+     * 
+     * @param cart The shopping cart to which the purchased product is being added.
      */
-    public void purchaseProduct() {
+    public void purchaseProduct(ShoppingCart cart) {
         /******************
          * This segment is where the user selects the product to purchase
          **********************/
@@ -140,15 +141,17 @@ public class InventoryManager {
      * Initiates and completes the return of a product from the shopping cart. 
      * Safeguards are in place to prevent user from returning more of any given
      * product than they have in their shopping cart. 
+     * 
+     * @param cart The shopping cart from which the product is being removed.
      */
-    public void returnProduct() {
+    public void returnProduct(ShoppingCart cart) {
         /******************* This segment is where the user selects the product to return**********************/
         Scanner scanner = new Scanner(System.in);
         boolean keepReturning = true;
         System.out.println("Please select a product to return: ");
         while (keepReturning == true) {
-            for (int i = 0; i < cart.cartQty.length; i++) {
-                if (cart.cartQty[i] > 0) { //prints all available choices for return
+            for (int i = 0; i < cart.cartQty.size(); i++) {
+                if (cart.cartQty.get(i).getQty() > 0) { //prints all available choices for return
                     System.out.println("To return " + inventory.get(i).getName() + " please press " + i + ".");
                 }
             }
@@ -163,13 +166,13 @@ public class InventoryManager {
             System.out.println("Please enter desired quantity to return: ");
             int returnQty = scanner.nextInt();
             for (int i = 0; i < inventory.size(); i++) {
-                if (userinput == i && returnQty <= cart.cartQty[i]) {
+                if (userinput == i && returnQty <= cart.cartQty.get(i).getQty()) {
                     cart.returnFromCart(inventory, i, returnQty);
                     System.out.println(returnQty + " units of " + inventory.get(i).getName()
                             + " returned from cart , return anything else? (Y for yes, N for no)");
-                } else if (userinput == i && returnQty > cart.cartQty[i]) { // executes if user attempts to return more
+                } else if (userinput == i && returnQty > cart.cartQty.get(i).getQty()) { // executes if user attempts to return more
                                                                             // than is in their cart
-                    System.out.println("Quantity is more than you have in your cart. You have " + cart.cartQty[i]
+                    System.out.println("Quantity is more than you have in your cart. You have " + cart.cartQty.get(i).getQty()
                             + " of this item.");
                     break;
                 } else {
