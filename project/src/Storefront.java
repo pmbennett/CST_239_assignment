@@ -78,6 +78,7 @@ public class Storefront {
 
                         Collections.sort(inv.inventory);
                         Collections.sort(cart.cartQty);
+                        System.out.println("Inventory and cart sorted!");
                         break;
                     } else {
                         System.out.println("Invalid option entered, please try again.");
