@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * It also allows for returning the contents of the cart to the store through the inventory manager.
  * 
  * @author Paul Bennett
- * @version 1.0
- * @since 11/28/2021
+ * @version 1.1
+ * @since 12/11/2021
  */
 public class ShoppingCart {
     public ArrayList<Product> cartQty = new ArrayList <Product>();
@@ -95,7 +95,7 @@ public class ShoppingCart {
      * @param p The Product ArrayList representing store inventory.
      * @param cart The shopping cart to be emptied.
      */
-    public void emptyCart(List<Product> p, ShoppingCart cart) {
+    public void emptyCart(ArrayList<Product> p, ShoppingCart cart) {
         for (int i = 0; i < cart.cartQty.size(); i++) {
             p.get(i).updateQty(cart.cartQty.get(i).getQty());
             cart.cartQty.get(i).setQty(0);

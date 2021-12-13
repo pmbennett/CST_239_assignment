@@ -1,5 +1,3 @@
-import java.io.Serializable;
-
 /**
  * Extends the product class, adding a "damage" field to represent the damage
  * given by the weapon. Chains Weapon constructor to allow for damage field to
@@ -11,7 +9,7 @@ import java.io.Serializable;
  * 
  * @see Product
  */
-public class Weapon extends Product implements Comparable<Product> {
+public class Weapon extends Product{
 
     private int damage;
 
@@ -53,15 +51,5 @@ public class Weapon extends Product implements Comparable<Product> {
      */
     public int getDamage() {
         return damage;
-    }
-
-    /**
-     * Compares the product with another product by name, in alphabetical order.
-     * Ignores letter case. For use with an array sorting algorithm.
-     */
-    @Override
-    public int compareTo(Product o) {
-        int nameComp = this.getName().compareToIgnoreCase(o.getName());
-        return nameComp;
     }
 }

@@ -10,7 +10,7 @@
      * @see Product
      */
     
-public class Health extends Product implements Comparable<Product> {
+public class Health extends Product{
    
     private int healthRegen;
 
@@ -52,14 +52,5 @@ public class Health extends Product implements Comparable<Product> {
      */
     public int getHealthRegen() {
         return healthRegen;
-    }
-    /**
-     * Compares the product with another product by name, in alphabetical order.
-     * Ignores letter case. For use with an array sorting algorithm. 
-     */
-    @Override
-    public int compareTo(Product o) {
-        int nameComp = this.getName().compareToIgnoreCase(o.getName());
-        return nameComp;
     }
 }
