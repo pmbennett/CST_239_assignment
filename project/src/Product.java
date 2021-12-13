@@ -170,7 +170,6 @@ public class Product implements Serializable, Comparable<Product> {
      * 
      * @param o The Product to be compared.
      */
-
     @Override
     public int compareTo(Product o) {
         if (getSortChoice() == 1) { //by name, ascending
