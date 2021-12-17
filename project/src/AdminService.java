@@ -1,49 +1,38 @@
 import java.io.*;
 import java.net.*;
-import java.util.*;
-
 
 //server
 public class AdminService {
     private ServerSocket server;
-    private Socket client;
+    private static Socket socket;
     private PrintWriter out;
-    private BufferedReader in;
+    private static BufferedReader in;
 
-    public void startService(int port) {
+    public void start(int port) throws IOException {
         System.out.println("Attempting to establish connection...");
-        try {
-            server = new ServerSocket(port); // opens server socket
-            client = server.accept(); // opens client socket
 
-            System.out.println("Connection established.");
+        server = new ServerSocket(port); // opens server socket
+        socket = server.accept(); // opens client socket
 
-        } catch (UnknownHostException e) {
-            System.out.println("Host could not be reached.");
-        } catch (IOException e) {
-            System.out.println("IO error occurred.");
-        }
-    }
+        System.out.println("Connection established. Being served on port " + port);
+        out = new PrintWriter(socket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-    public void appendToFile(String inputLine) throws IOException {
-            out = new PrintWriter(client.getOutputStream(), true); // recieves info from client
-            in = new BufferedReader(new InputStreamReader(client.getInputStream())); //returns info to client
+        String input;
 
-            
-            Scanner scan = new Scanner(in.readLine()); //reads input from client
-            FileWriter invUpdate = new FileWriter("inventory.json", true); //opens filewriter to write to JSON file
-            PrintWriter invUpdateWriter = new PrintWriter(invUpdate); //printwriter that channels through filewriter
-           
-           
-            while (scan.hasNext()) {
-                String json = scan.nextLine();
-                invUpdateWriter.println(json);
+       while ((input = in.readLine()) != null) {
+            if (".".equals(input)) {
+                System.out.println("Shutdown command received.");
+                out.println("QUIT");
+                break;
+            } else {
+                System.out.println("Message received: " + input);
+                out.println("OK");
             }
-            scan.close();
-            invUpdateWriter.close();
-            invUpdate.close();
-    }
-
+        }
+        System.out.println("Server is shut down.");
+        }
+    
 
     /**
      * Closes all server/client connections and I/O streams.
@@ -53,25 +42,14 @@ public class AdminService {
     public void cleanup() throws IOException {
         in.close();
         out.close();
-        client.close();
+        socket.close();
         server.close();
     }
 
-    public Socket getClient(){
-        return client;
-    }
-
-    public static void main(String[] args) throws IOException, IllegalArgumentException,InterruptedException {
+    public static void main(String[] args) throws IOException {
+        System.out.println("check server");
         AdminService service = new AdminService();
-        service.startService(6666);
-        BufferedReader in = new BufferedReader(new InputStreamReader(service.getClient().getInputStream()));
-        String inputLine;
-        while ((inputLine = in.readLine()) != "Quit"){
-            if ((inputLine = in.readLine())!= null){
-                service.appendToFile(inputLine);
-            } else {
-                Thread.sleep(100);
-            }
-        }
+        service.start(6666);
+
     }
 }

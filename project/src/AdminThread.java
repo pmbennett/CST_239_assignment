@@ -1,9 +1,15 @@
+import java.io.IOException;
 
 //server thread
 public class AdminThread extends Thread {
 
     public void run(){
         AdminService admin = new AdminService();
-        admin.startService(6666);
+       try{
+        admin.start(6666);
+       } catch (IOException e) {
+        System.out.println("IO error occurred.");
+        e.printStackTrace();
+    }
     }
 }

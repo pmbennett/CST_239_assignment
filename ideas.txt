@@ -1,0 +1,13 @@
+define update and return inventory as individual task classes?
+
+
+
+
+
+
+
+
+
+
+import java.util.*;
+import com.fasterxml.jackson.databind.ObjectMapper;

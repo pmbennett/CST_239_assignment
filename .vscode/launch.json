@@ -1,0 +1,50 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch AdminApp",
+            "request": "launch",
+            "mainClass": "AdminApp",
+            "projectName": "CST_239_assignment_a957b"
+        },
+        {
+            "type": "java",
+            "name": "Launch AdminClient",
+            "request": "launch",
+            "mainClass": "AdminClient",
+            "projectName": "CST_239_assignment_a957b"
+        },
+        {
+            "type": "java",
+            "name": "Launch AdminService",
+            "request": "launch",
+            "mainClass": "AdminService",
+            "projectName": "CST_239_assignment_a957b"
+        },
+        {
+            "type": "java",
+            "name": "Launch Storefront",
+            "request": "launch",
+            "mainClass": "Storefront",
+            "projectName": "CST_239_assignment_a957b"
+        }
+    ]
+
+    "compounds": [
+        {
+            "name": "Server test",
+            "configurations": ["Launch AdminApp","Launch AdminClient","Launch Storefront"]
+        },
+    ]
+}
