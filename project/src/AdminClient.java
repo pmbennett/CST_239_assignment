@@ -1,6 +1,8 @@
 import java.net.*;
 import java.io.*;
 import java.util.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 //client
 public class AdminClient {
@@ -19,22 +21,43 @@ public class AdminClient {
         out.println(message);
     }
 
-    public String recMsg() throws IOException{
+    public String recMsg() throws IOException {
         return in.readLine();
     }
 
-    public void updateInv(String response) throws IOException {
-        FileWriter invUpdate = new FileWriter("inventory.json", true); // opens filewriter to write to JSON file
-        PrintWriter invUpdateWriter = new PrintWriter(invUpdate); // printwriter that channels through filewriter
+    public void readInv(String invFile) throws IOException {
 
-        invUpdateWriter.println(response);
-        invUpdateWriter.close();
-        invUpdate.close();
-        System.out.println("updateInvclient executes");
+        File file = new File(invFile);
+        Scanner scan = new Scanner(file);
+
+        while (scan.hasNext()) {
+            String json = scan.nextLine();
+            ObjectMapper mapper = new ObjectMapper();
+            if (json.contains("damage")) {
+                Weapon item = mapper.readValue(json, Weapon.class);
+                sendToServer(item);
+            } else if (json.contains("protection")) {
+                Armor item = mapper.readValue(json, Armor.class);
+                sendToServer(item);
+            } else if (json.contains("healthRegen")) {
+                Health item = mapper.readValue(json, Health.class);
+                sendToServer(item);
+            }
+        }
+        scan.close();
+        System.out.println("updateInvserver executes");
     }
 
-    public BufferedReader getInStream(){
+    public BufferedReader getInStream() {
         return in;
+    }
+
+    public void sendToServer(Product item) throws JsonProcessingException {
+        ObjectMapper om = new ObjectMapper();
+        String json = om.writeValueAsString(item);
+        out.println(json);
+        System.out.println("sendtoserver exec");
+        System.out.println(json);
     }
 
     /**
@@ -62,27 +85,30 @@ public class AdminClient {
 
         Scanner scan = new Scanner(System.in);
         Character userInput = scan.next().charAt(0);
-
+        System.out.println("To update the store, press U.");
+        System.out.println("To return salable inventory, press R.");
+        System.out.println("To quit the Admin Client, press Q.");
         while (userInput != 'Q') {
-            System.out.println("To update the store, press U.");
-            System.out.println("To return salable inventory, press R.");
-            System.out.println("To quit the Admin Client, press Q.");
-            String response;
+
             if (userInput.equals('U')) {
-                admin.messageServer("U");
-                while ((response = admin.recMsg())!= null){
-                admin.updateInv(response);
-                System.out.println("Server response was: " + response);
-                }  
+                String response;
+                admin.messageServer("U");// tells server to start listening for updates
+                admin.readInv("invupdate.json");// reads new file, puts into output stream
+                response = admin.recMsg();
+                System.out.println("From server: " + response);
             } else if (userInput.equals('R')) {
+                String response;
                 admin.messageServer("R");
                 response = null;
                 // return store inventory method
-                System.out.println("Server response was: " + response);
+                System.out.println("From server: " + response);
             } else {
-                Thread.sleep(100);
+                userInput = 'X';
+                userInput = scan.next().charAt(0);
+                Thread.sleep(1000);
+                System.out.println("Enter new reqeust when ready.");
+                continue;
             }
-            userInput = scan.next().charAt(0);
         }
         admin.cleanup();
     }
