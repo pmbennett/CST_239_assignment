@@ -20,6 +20,7 @@ public class ShoppingCart {
      * to a default of zero.
      * 
      * @param filename The name of the JSON file from which to read, to initialize inventory. 
+     * @throws IOException
      */
     public void initializeCart(String filename) throws IOException {
         

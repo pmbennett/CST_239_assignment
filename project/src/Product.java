@@ -1,5 +1,7 @@
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * A product that is salable through the StoreFront application, and contains
  * basic information that a customer needs to make buying decisions.
@@ -14,7 +16,8 @@ public class Product implements Serializable, Comparable<Product> {
     private String desc = "null"; // a description of the product
     private double price = 0.00;
     private int qty = 0; // quantity of the product, for use with storefront app
-    public static int sortChoice = 0;
+    @JsonIgnore
+    private static int sortChoice = 0;
 
     /**
      * Default no arg constructor. Utilizes setters and getters for initializing
@@ -160,6 +163,7 @@ public class Product implements Serializable, Comparable<Product> {
      * 
      * @return An int that corresponds to a user's choice of sort criteria.
      */
+    @JsonIgnore
     public int getSortChoice() {
         return sortChoice;
     }

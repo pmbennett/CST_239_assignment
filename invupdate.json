@@ -1,0 +1,3 @@
+{"name": "Throwing knives", "desc": "It's a knife, but you throw it. Like the name says. Throwing knife.", "price": 20.00, "qty": 4, "damage":10}
+{"name": "Chainmail", "desc": "You could've made this yourself with paper clips.", "price": 35.00, "qty": 2, "protection":10}
+{"name": "Super health potion", "desc": "I honestly don't know what's in it. I bought it from a guy in a shack.", "price": 200.00, "qty": 1, "healthRegen": 100}

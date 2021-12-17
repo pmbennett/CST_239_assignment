@@ -5,9 +5,9 @@ import java.util.Scanner;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * The inventory manager is the backbone of the store. It is responsible for 
- * the initialization of the inventory (by reading from a JSON file). 
- * It also allows users to purchase and return products, through integration 
+ * The inventory manager is the backbone of the store. It is responsible for
+ * the initialization of the inventory (by reading from a JSON file).
+ * It also allows users to purchase and return products, through integration
  * with the Shopping Cart.
  * 
  * @author Paul Bennett
@@ -19,15 +19,16 @@ public class InventoryManager {
     public ArrayList<Product> inventory = new ArrayList<Product>(); // initializes an ArrayList of type product
                                                                     // for holding store inventory
 
-   
-     /**
+    /**
      * Adds the initial inventory for the store, when initialized.
-     * Reads from JSON file to do so. 
+     * Reads from JSON file to do so.
      * 
-     * @param filename The name of the JSON file from which to read, to initialize inventory. 
+     * @param filename The name of the JSON file from which to read, to initialize
+     *                 inventory.
+     * @throws IOException
      */
     public void initializeStore(String filename) throws IOException {
-        
+
         File file = new File(filename);
         Scanner scan = new Scanner(file);
 
@@ -70,9 +71,12 @@ public class InventoryManager {
 
     /**
      * Guides the user through purchasing a product by displaying options and
-     * requesting user input. Safeguard is provided so user cannot purchase more than available on hand.
-     * Attempting to do so will end the method and revert back to the main menu. After user has made a
-     * selection, confirmation will be required. If the user does not confirm, the purchase will be canceled.
+     * requesting user input. Safeguard is provided so user cannot purchase more
+     * than available on hand.
+     * Attempting to do so will end the method and revert back to the main menu.
+     * After user has made a
+     * selection, confirmation will be required. If the user does not confirm, the
+     * purchase will be canceled.
      * 
      * @param cart The shopping cart to which the purchased product is being added.
      */
@@ -91,8 +95,19 @@ public class InventoryManager {
                                                                                                                   // available
                                                                                                                   // choices
                 } else {
-                    System.out.println(inventory.get(i).getName() + " is out of stock. Please check back later."); // prints if item is out of stock, so user knows the item                                                                                                                    
-                }                                                                                                  // may become available again at a later time.
+                    System.out.println(inventory.get(i).getName() + " is out of stock. Please check back later."); // prints
+                                                                                                                   // if
+                                                                                                                   // item
+                                                                                                                   // is
+                                                                                                                   // out
+                                                                                                                   // of
+                                                                                                                   // stock,
+                                                                                                                   // so
+                                                                                                                   // user
+                                                                                                                   // knows
+                                                                                                                   // the
+                                                                                                                   // item
+                } // may become available again at a later time.
             }
 
             /*
@@ -137,28 +152,32 @@ public class InventoryManager {
             }
         }
     }
+
     /**
-     * Initiates and completes the return of a product from the shopping cart. 
+     * Initiates and completes the return of a product from the shopping cart.
      * Safeguards are in place to prevent user from returning more of any given
-     * product than they have in their shopping cart. 
+     * product than they have in their shopping cart.
      * 
      * @param cart The shopping cart from which the product is being removed.
      */
     public void returnProduct(ShoppingCart cart) {
-        /******************* This segment is where the user selects the product to return**********************/
+        /*******************
+         * This segment is where the user selects the product to return
+         **********************/
         Scanner scanner = new Scanner(System.in);
         boolean keepReturning = true;
         System.out.println("Please select a product to return: ");
         while (keepReturning == true) {
             for (int i = 0; i < cart.cartQty.size(); i++) {
-                if (cart.cartQty.get(i).getQty() > 0) { //prints all available choices for return
+                if (cart.cartQty.get(i).getQty() > 0) { // prints all available choices for return
                     System.out.println("To return " + inventory.get(i).getName() + " please press " + i + ".");
                 }
             }
 
             /*
              * Here, the user is prompted to enter the quantity they wish to return of their
-             * selected item. After this, the item is removed from the cart and they are prompted to
+             * selected item. After this, the item is removed from the cart and they are
+             * prompted to
              * confirm if they wish to return anything else or return to the main menu.
              */
             int userinput = scanner.nextInt();
@@ -170,10 +189,12 @@ public class InventoryManager {
                     cart.returnFromCart(inventory, i, returnQty);
                     System.out.println(returnQty + " units of " + inventory.get(i).getName()
                             + " returned from cart , return anything else? (Y for yes, N for no)");
-                } else if (userinput == i && returnQty > cart.cartQty.get(i).getQty()) { // executes if user attempts to return more
-                                                                            // than is in their cart
-                    System.out.println("Quantity is more than you have in your cart. You have " + cart.cartQty.get(i).getQty()
-                            + " of this item.");
+                } else if (userinput == i && returnQty > cart.cartQty.get(i).getQty()) { // executes if user attempts to
+                                                                                         // return more
+                    // than is in their cart
+                    System.out.println(
+                            "Quantity is more than you have in your cart. You have " + cart.cartQty.get(i).getQty()
+                                    + " of this item.");
                     break;
                 } else {
                     continue;
@@ -194,5 +215,8 @@ public class InventoryManager {
                 }
             }
         }
+    }
+
+    public void updateFromAdmin() {
     }
 }

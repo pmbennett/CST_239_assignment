@@ -15,9 +15,26 @@ public class AdminClient {
         in = new BufferedReader(new InputStreamReader(client.getInputStream()));
     }
 
-    public String messageServer(String message) throws IOException {
+    public void messageServer(String message) throws IOException {
         out.println(message);
+    }
+
+    public String recMsg() throws IOException{
         return in.readLine();
+    }
+
+    public void updateInv(String response) throws IOException {
+        FileWriter invUpdate = new FileWriter("inventory.json", true); // opens filewriter to write to JSON file
+        PrintWriter invUpdateWriter = new PrintWriter(invUpdate); // printwriter that channels through filewriter
+
+        invUpdateWriter.println(response);
+        invUpdateWriter.close();
+        invUpdate.close();
+        System.out.println("updateInvclient executes");
+    }
+
+    public BufferedReader getInStream(){
+        return in;
     }
 
     /**
@@ -39,20 +56,33 @@ public class AdminClient {
         AdminClient admin = new AdminClient();
         admin.start("localhost", 6666);
 
-        String response;
-        for (int i = 0; i < 10; i++) {
-            String message;
-            if (i != 9) {
-                message = ("Hello from client " + i);
+        System.out.println("To update the store, press U.");
+        System.out.println("To return salable inventory, press R.");
+        System.out.println("To quit the Admin Client, press Q.");
+
+        Scanner scan = new Scanner(System.in);
+        Character userInput = scan.next().charAt(0);
+
+        while (userInput != 'Q') {
+            System.out.println("To update the store, press U.");
+            System.out.println("To return salable inventory, press R.");
+            System.out.println("To quit the Admin Client, press Q.");
+            String response;
+            if (userInput.equals('U')) {
+                admin.messageServer("U");
+                while ((response = admin.recMsg())!= null){
+                admin.updateInv(response);
+                System.out.println("Server response was: " + response);
+                }  
+            } else if (userInput.equals('R')) {
+                admin.messageServer("R");
+                response = null;
+                // return store inventory method
+                System.out.println("Server response was: " + response);
             } else {
-                message = ".";
+                Thread.sleep(100);
             }
-            response = admin.messageServer(message);
-            System.out.println("Server response was: " + response);
-            if (response.equals("QUIT")) {
-                break;
-            }
-            Thread.sleep(5000);
+            userInput = scan.next().charAt(0);
         }
         admin.cleanup();
     }
