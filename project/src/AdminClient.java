@@ -5,7 +5,23 @@ import java.nio.file.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//client
+/**
+ * A client application that works with the Administrative server to update
+ * inventory for the Storefront application.
+ * 
+ * This client has the ability to send commands, which include commands to make
+ * the server update the master inventory JSON file by reading from a seperate
+ * JSON file, and sending a request to the server for the full store inventory in JSON
+ * format to the console.
+ * 
+ * This application leverages the Jackson library to send serialized JSON
+ * objects to the server, which are then processed and added to the master
+ * inventory file.
+ * 
+ * @author Paul Bennett
+ * @version 1.0
+ * @since 12/18/21
+ */
 public class AdminClient {
     private Socket client;
     private PrintWriter out;
@@ -28,16 +44,28 @@ public class AdminClient {
         in = new BufferedReader(new InputStreamReader(client.getInputStream()));
     }
 
+    /**
+     * Sends data from the client to the server through the output stream.
+     * 
+     * @param message The communication to be sent to the server.
+     * @throws IOException
+     */
     public void messageServer(String message) throws IOException {
         out.println(message);
     }
 
+    /**
+     * Receives and reads data from the server through the input stream.
+     * 
+     * @return The communication from the server.
+     * @throws IOException
+     */
     public String recMsg(BufferedReader in) throws IOException {
         return in.readLine();
     }
 
     /**
-     * \
+     * 
      * Reads a JSON file and sends each line in string format to the server for
      * processing. Critical method for the client to work correctly.
      * 
@@ -165,9 +193,10 @@ public class AdminClient {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-               break;
+                break;
             }
         }
+        scan.close();
         admin.cleanup();
         System.out.println("Admin service shut down.");
     }

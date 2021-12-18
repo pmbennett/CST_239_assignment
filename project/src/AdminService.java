@@ -2,12 +2,21 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.nio.file.*;
-import java.util.concurrent.locks.Condition;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-//server
+/**
+ * A server application that works with the Administrative client app to update
+ * inventory for the Storefront application.
+ * 
+ * This server has the ability to receive and process commands, which include
+ * updating the master inventory JSON file by reading
+ * from a seperate JSON file, and returning in JSON format the full store
+ * inventory to the client's console. This application is threaded so
+ * the server can be run without disturbing the user of the storefront.
+ * 
+ * @author Paul Bennett
+ * @version 1.0
+ * @since 12/18/21
+ */
 public class AdminService {
     private ServerSocket server;
     private Socket socket;
@@ -52,7 +61,7 @@ public class AdminService {
                 messageClient("Current store inventory as JSON: ");
                 returnInv("inventory.json");
                 System.out.println("Inventory returned to client.");
-            } else if("Q".equals(input)) {
+            } else if ("Q".equals(input)) {
                 break;
             }
         }
@@ -61,7 +70,7 @@ public class AdminService {
     }
 
     /**
-     * Sends a message from the server to the client through the output stream.
+     * Sends data from the server to the client through the output stream.
      * 
      * @param message The communication to be sent to the client.
      * @throws IOException
@@ -71,9 +80,9 @@ public class AdminService {
     }
 
     /**
-     * Receives and reads a message from the client through the input stream.
+     * Receives and reads data from the client through the input stream.
      * 
-     * @return The message from the client.
+     * @return The communication from the client.
      * @throws IOException
      */
     public String recMsg() throws IOException {
@@ -144,7 +153,7 @@ public class AdminService {
     public void cleanup() throws IOException {
         in.close();
         out.close();
-        //socket.close();
+        // socket.close();
         server.close();
     }
 
