@@ -21,7 +21,7 @@ public class AdminClient {
         out.println(message);
     }
 
-    public String recMsg() throws IOException {
+    public String recMsg(BufferedReader in) throws IOException {
         return in.readLine();
     }
 
@@ -48,8 +48,8 @@ public class AdminClient {
         System.out.println("updateInvserver executes");
     }
 
-    public BufferedReader getInStream() {
-        return in;
+    public Socket getclient() {
+        return client;
     }
 
     public void sendToServer(Product item) throws JsonProcessingException {
@@ -57,7 +57,6 @@ public class AdminClient {
         String json = om.writeValueAsString(item);
         out.println(json);
         System.out.println("sendtoserver exec");
-        System.out.println(json);
     }
 
     /**
@@ -75,38 +74,47 @@ public class AdminClient {
         }
     }
 
-    public static void main(String[] args) throws UnknownHostException, IOException, InterruptedException {
+    public static void main(String[] args){
         AdminClient admin = new AdminClient();
-        admin.start("localhost", 6666);
-
-        System.out.println("To update the store, press U.");
-        System.out.println("To return salable inventory, press R.");
-        System.out.println("To quit the Admin Client, press Q.");
-
+        try {
+            admin.start("localhost", 6666);
+         } catch (IOException e){
+             e.printStackTrace();
+         }
         Scanner scan = new Scanner(System.in);
-        Character userInput = scan.next().charAt(0);
-        System.out.println("To update the store, press U.");
-        System.out.println("To return salable inventory, press R.");
-        System.out.println("To quit the Admin Client, press Q.");
-        while (userInput != 'Q') {
+        char userInput = 'X';
 
-            if (userInput.equals('U')) {
+        while (userInput != 'Q') {
+            System.out.println("To update the store, press U.");
+            System.out.println("To return salable inventory, press R.");
+            System.out.println("To quit the Admin Client, press Q.");
+            userInput = scan.next().charAt(0);
+            System.out.println(userInput);
+            if (userInput=='U') {
+                try{
                 String response;
                 admin.messageServer("U");// tells server to start listening for updates
                 admin.readInv("invupdate.json");// reads new file, puts into output stream
-                response = admin.recMsg();
+                response = admin.recMsg(admin.in);
                 System.out.println("From server: " + response);
-            } else if (userInput.equals('R')) {
+                continue;
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+            } else if (userInput=='R') {
+               try{
+
                 String response;
                 admin.messageServer("R");
                 response = null;
                 // return store inventory method
                 System.out.println("From server: " + response);
+                continue;
+               } catch (IOException e){
+                   e.printStackTrace();
+               }
             } else {
                 userInput = 'X';
-                userInput = scan.next().charAt(0);
-                Thread.sleep(1000);
-                System.out.println("Enter new reqeust when ready.");
                 continue;
             }
         }

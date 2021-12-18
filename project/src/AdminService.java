@@ -9,9 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //server
 public class AdminService {
     private ServerSocket server;
-    private static Socket socket;
+    private Socket socket;
     private PrintWriter out;
-    private static BufferedReader in;
+    private BufferedReader in;
 
     public void start(int port) throws IOException, InterruptedException {
         System.out.println("Attempting to establish connection...");
@@ -23,26 +23,27 @@ public class AdminService {
         out = new PrintWriter(socket.getOutputStream(), true);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-        String input = recMsg();
-
-        while (input.equals("Q") == false) {
+        String input;
+        while ((input = in.readLine()) != "Q") {
+            System.out.println(input);
             if ("U".equals(input)) {
                 System.out.println("Message received: Update inventory.");
                 System.out.println("Processing...");
-
-                while ((input = in.readLine()) != null) {
+                while (input.contains("{")) {
+                    input = in.readLine();
                     updateInv(input);
+                    System.out.println(input);
                 }
-                messageClient("Inventory update complete.");
+                out.println("Inventory update complete.");
                 System.out.println("Inventory updated successfully, confirmation sent to client.");
-                input = "X";
+                
             } else if ("R".equals(input)) {
                 System.out.println("Message received: Return inventory.");
                 System.out.println("Processing...");
                 // returninv method
                 System.out.println("Inventory returned under 'inventory.json'. Confirmation sent to client.");
+                continue;
             } else {
-                System.out.println("Stuck here?");
                 continue;
             }
         }
@@ -55,6 +56,7 @@ public class AdminService {
         if (input.equals("U")) {
             invUpdateWriter.close();
             invUpdate.close();
+            System.out.println("Stuck here?");
             return;
         } else {
             invUpdateWriter.println(input);
@@ -89,6 +91,8 @@ public class AdminService {
         try {
             service.start(6666);
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e){
             e.printStackTrace();
         }
     }
