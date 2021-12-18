@@ -1,6 +1,7 @@
 import java.net.*;
 import java.io.*;
 import java.util.*;
+import java.nio.file.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,7 +16,7 @@ public class AdminClient {
      * streams for transmission of server commands and data transmission and
      * reception.
      * 
-     * @param ip The IP address or host name of the server.
+     * @param ip   The IP address or host name of the server.
      * @param port The port to establish a connection on with the server.
      * @throws UnknownHostException
      * @throws IOException
@@ -64,11 +65,39 @@ public class AdminClient {
             }
         }
         scan.close();
-        System.out.println("updateInvserver executes");
     }
 
     /**
-     * \
+     * Receives transmission of inventory from the server and prints to console in
+     * JSON format.
+     * 
+     * @throws IOException
+     */
+    public void getFullInv() throws IOException {
+        for (int i = 0; i < readLines(); i++) {
+            System.out.println(recMsg(in));
+        }
+    }
+
+    /**
+     * Reads through the JSON file containing master inventory, and counts each
+     * line, thereby effectively returning a count of total products.
+     * 
+     * @return The line count of the JSON file containing the new inventory items.
+     */
+    public long readLines() {
+        long count = 0;
+        try {
+            Path file = Paths.get("inventory.json");
+            count = Files.lines(file).count();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    /**
+     * 
      * Sends a JSON string representing a saleable product to the server for
      * processing.
      * 
@@ -78,7 +107,6 @@ public class AdminClient {
         ObjectMapper om = new ObjectMapper();
         String json = om.writeValueAsString(item);
         out.println(json);
-        System.out.println("sendtoserver exec");
     }
 
     /**
@@ -106,13 +134,12 @@ public class AdminClient {
         Scanner scan = new Scanner(System.in);
         char userInput = 'X';
 
-        while (userInput != 'Q') {
+        while (userInput != 'Q' || userInput != 'q') {
             System.out.println("To update the store, press U.");
             System.out.println("To return salable inventory, press R.");
             System.out.println("To quit the Admin Client, press Q.");
             userInput = scan.next().charAt(0);
-            System.out.println(userInput);
-            if (userInput == 'U') {
+            if (userInput == 'U' || userInput == 'u') {
                 try {
                     String response;
                     admin.messageServer("U");// tells server to start listening for updates
@@ -123,32 +150,25 @@ public class AdminClient {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else if (userInput == 'R') {
+            } else if (userInput == 'R' || userInput == 'r') {
                 try {
-
-                    String response;
                     admin.messageServer("R");
-                    response = null;
-                    // return store inventory method
-                    System.out.println("From server: " + response);
+                    admin.recMsg(admin.in);
+                    admin.getFullInv();
                     continue;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else if (userInput == 'Q') {
+            } else if (userInput == 'Q' || userInput == 'q') {
                 try {
                     admin.messageServer("Q");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                admin.cleanup();
+               break;
             }
         }
-        try {
-            admin.messageServer("Q");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         admin.cleanup();
+        System.out.println("Admin service shut down.");
     }
 }

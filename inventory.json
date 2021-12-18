@@ -3,3 +3,6 @@
 {"name": "Chestplate", "desc": "A standard chestplate to protect...you know, what's in your chest.", "price": 50.00, "qty": 3, "protection": 30}
 {"name": "Helmet", "desc": "It goes on your head, and protects...well...whatever it is you've got in there.", "price": 60.00, "qty": 3, "protection": 30}
 {"name": "Health Potion", "desc": "Regenerates health lost from taking on fights.", "price": 40.00, "qty": 2, "healthRegen": 50}
+{"name":"Throwing knive","desc":"It's a knife, but you throw it. Like the name says. Throwing knife.","price":20.0,"qty":4,"damage":10}
+{"name":"Chainmail","desc":"You could've made this yourself with paper clips.","price":35.0,"qty":2,"protection":10}
+{"name":"Super health potion","desc":"I honestly don't know what's in it. I bought it from a guy in a shack.","price":200.0,"qty":1,"healthRegen":100}

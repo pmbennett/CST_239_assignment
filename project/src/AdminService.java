@@ -36,7 +36,6 @@ public class AdminService {
 
         String input;
         while ((input = in.readLine()) != "Q") {
-            System.out.println(input);
             if ("U".equals(input)) {
                 System.out.println("Message received: Update inventory.");
                 System.out.println("Processing...");
@@ -47,16 +46,17 @@ public class AdminService {
                 }
                 out.println("Inventory update complete.");
                 System.out.println("Inventory updated successfully, confirmation sent to client.");
-                continue;
             } else if ("R".equals(input)) {
                 System.out.println("Message received: Return inventory.");
                 System.out.println("Processing...");
-                // returninv method
-                System.out.println("Inventory returned under 'inventory.json'. Confirmation sent to client.");
-            } else {
-                continue;
+                messageClient("Current store inventory as JSON: ");
+                returnInv("inventory.json");
+                System.out.println("Inventory returned to client.");
+            } else if("Q".equals(input)) {
+                break;
             }
         }
+        cleanup();
         System.out.println("Server is shut down.");
     }
 
@@ -94,8 +94,29 @@ public class AdminService {
         invUpdateWriter.println(input);
         invUpdateWriter.close();
         invUpdate.close();
-        System.out.println("updateInvclient executes");
+    }
 
+    /**
+     * Processes a request from the client to return the entire inventory of the
+     * store as JSON strings to the client console. Reads from master inventory file
+     * to do so.
+     * 
+     * @param filename The filename of the master JSON inventory file.
+     */
+    public void returnInv(String filename) {
+        try {
+            File file = new File(filename);
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                String json = sc.nextLine();
+                messageClient(json);
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -123,7 +144,7 @@ public class AdminService {
     public void cleanup() throws IOException {
         in.close();
         out.close();
-        socket.close();
+        //socket.close();
         server.close();
     }
 
