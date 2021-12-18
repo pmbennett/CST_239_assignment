@@ -43,8 +43,12 @@
 
     "compounds": [
         {
-            "name": "Server test",
+            "name": "Server + Store",
             "configurations": ["Launch AdminApp","Launch AdminClient","Launch Storefront"]
         },
+        {
+            "name": "Sever test",
+            "configurations": ["Launch AdminApp", "Launch AdminClient"]
+        }
     ]
 }

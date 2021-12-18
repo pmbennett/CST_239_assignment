@@ -8,7 +8,7 @@ public class AdminThread extends Thread {
         try {
             admin.start(6666);
         } catch (IOException e) {
-            System.out.println("IO error occurred.");
+            System.out.println("IO error occurred in adminThread.");
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
