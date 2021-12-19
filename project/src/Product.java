@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 
 /**
  * A product that is salable through the StoreFront application, and contains

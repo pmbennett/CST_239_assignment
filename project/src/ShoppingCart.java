@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.File;
 import java.io.IOException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 /**
  * This class supports the storage of purchased products by a customer until they leave a store.
  * It also allows for returning the contents of the cart to the store through the inventory manager.
