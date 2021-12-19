@@ -7,3 +7,6 @@ Link to screencast video for week 3: https://screencast-o-matic.com/watch/crXUeP
 Link to screencast video for week 4: https://screencast-o-matic.com/watch/crl1hjV2QL4
 
 Link to screencast video for week 5: https://screencast-o-matic.com/watch/crlInLV2vwY
+
+Link to screencast video for week 6: https://screencast-o-matic.com/watch/crlqh8V2HNY
+
