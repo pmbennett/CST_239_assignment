@@ -1,3 +1,4 @@
+package main;
 /**
  * Extends the product class, adding a "protection" field to represent the
  * protection buff given by the armor. Chains Product constructor to allow for

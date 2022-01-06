@@ -1,4 +1,6 @@
- /**
+package main;
+
+/**
      * Extends the product class, adding a "healthRegen" field to represent the
      * health restored by the potion. Chains Product constructor to allow for
      * healthRegen field to be initialized from constructor.

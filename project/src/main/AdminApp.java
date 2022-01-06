@@ -1,3 +1,4 @@
+package main;
 /**
  * Runs the administrative server thread, containing the server app.
  * 
