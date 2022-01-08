@@ -1,5 +1,7 @@
 package test;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.junit.*;
@@ -35,7 +37,9 @@ public class ShoppingCartTest {
             test.initializeCart("inventory.json");
             ArrayList<Product> actual = test.getList();
             Assert.assertNotNull(actual);
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e){
             e.printStackTrace();
         }
     }
@@ -63,7 +67,9 @@ public class ShoppingCartTest {
             ArrayList<Product> actual = test.getList();
             test.addToCart(actual, 2, 3);
             Assert.assertEquals(3,actual.get(2).getQty());
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e){
             e.printStackTrace();
         }
     }
@@ -94,7 +100,9 @@ public class ShoppingCartTest {
             test.returnFromCart(actual, 2, 1);
             int testVal = actual.get(2).getQty();
             Assert.assertEquals(2, testVal);
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e){
             e.printStackTrace();
         }
     }
@@ -112,7 +120,9 @@ public class ShoppingCartTest {
             Assert.assertEquals(0, actual.get(4).getQty());
             Assert.assertEquals(0, actual.get(5).getQty());
 
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e){
             e.printStackTrace();
         }
     }
