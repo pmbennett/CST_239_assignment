@@ -76,7 +76,7 @@ public class ProductTest {
     @Test
     public void testSetAndGetSortChoice() {
         Product test = new Product();
-        test.setSortChoice(2);
+        Product.setSortChoice(2);
         Assert.assertEquals(2, test.getSortChoice());
     }
 
