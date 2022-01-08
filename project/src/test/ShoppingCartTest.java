@@ -34,7 +34,7 @@ public class ShoppingCartTest {
     public void testInitializeCart() {
         ShoppingCart test = new ShoppingCart();
         try {
-            test.initializeCart("inventory.json");
+            test.initializeCart("D:\\coding\\CST_239_assignment\\inventory.json");
             ArrayList<Product> actual = test.getList();
             Assert.assertNotNull(actual);
         } catch (FileNotFoundException e) {
@@ -58,15 +58,29 @@ public class ShoppingCartTest {
      * variables, a seperate unit test has been written for the initializeCart
      * method. If that test passes but this does not, the problem can be isolated to
      * the method being tested here.
+     * 
+     * The shopping cart is dependent on a storefront being initialized, and therefore 
+     * an inventory manager class is created here as well. If the inventory manager 
+     * does not correctly initialize, the test will fail. In the interests of being able 
+     * to isolate the issue, the inventory manager initialization methods and other methods are
+     * tested elsewhere. If this test fails but the initialization test for the inventory 
+     * manager passes, the issue can be isolated to the method being tested here. If all 
+     * tests in the test suite pass, then it can be safely concluded that all methods are 
+     * properly functioning.
+     * 
+     * @see InventoryManagerTest
      */
     @Test
     public void testAddToCart() {
         ShoppingCart test = new ShoppingCart();
+        InventoryManager inv = new InventoryManager();
         try {
-            test.initializeCart("inventory.json"); // This is tested elsewhere.
+            inv.initializeStore("D:\\coding\\CST_239_assignment\\inventory.json");
+            test.initializeCart("D:\\coding\\CST_239_assignment\\inventory.json"); // This is tested elsewhere.
             ArrayList<Product> actual = test.getList();
-            test.addToCart(actual, 2, 3);
-            Assert.assertEquals(3,actual.get(2).getQty());
+            test.addToCart(inv.inventory, 2, 3);
+            int testVal = actual.get(2).getQty();
+            Assert.assertEquals(3,testVal);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e){
@@ -89,15 +103,28 @@ public class ShoppingCartTest {
      * variables, a seperate unit test has been written for both.
      * If those tests pass but this one does not, the problem can be isolated to
      * the method being tested here.
+     * 
+     * The shopping cart is dependent on a storefront being initialized, and therefore 
+     * an inventory manager class is created here as well. If the inventory manager 
+     * does not correctly initialize, the test will fail. In the interests of being able 
+     * to isolate the issue, the inventory manager initialization methods and other methods are
+     * tested elsewhere. If this test fails but the initialization test for the inventory 
+     * manager passes, the issue can be isolated to the method being tested here. If all 
+     * tests in the test suite pass, then it can be safely concluded that all methods are 
+     * properly functioning.
+     * 
+     * @see InventoryManagerTest
      */
     @Test
     public void testReturnFromCart() {
         ShoppingCart test = new ShoppingCart();
+        InventoryManager inv = new InventoryManager();
         try {
-            test.initializeCart("inventory.json"); // This is tested elsewhere.
+            inv.initializeStore("D:\\coding\\CST_239_assignment\\inventory.json");
+            test.initializeCart("D:\\coding\\CST_239_assignment\\inventory.json"); // This is tested elsewhere.
             ArrayList<Product> actual = test.getList();
-            test.addToCart(actual, 2, 3); // This is tested elsewhere.
-            test.returnFromCart(actual, 2, 1);
+            test.addToCart(inv.inventory, 2, 3); // This is tested elsewhere.
+            test.returnFromCart(inv.inventory, 2, 1);
             int testVal = actual.get(2).getQty();
             Assert.assertEquals(2, testVal);
         } catch (FileNotFoundException e) {
@@ -106,16 +133,34 @@ public class ShoppingCartTest {
             e.printStackTrace();
         }
     }
+
+    /**
+     * This tests the method that is supposed to return all products from the cart to the 
+     * store inventory. Multiple products are used to ensure all return to zero. 
+     * 
+     * The shoppng cart is dependent on a storefront being initialized, and therefore 
+     * an inventory manager class is created here as well. If the inventory manager 
+     * does not correctly initialize, the test will fail. In the interests of being able 
+     * to isolate the issue, the inventory manager initialization methods and other methods are
+     * tested elsewhere. If this test fails but the initialization test for the inventory 
+     * manager passes, the issue can be isolated to the method being tested here. If all 
+     * tests in the test suite pass, then it can be safely concluded that all methods are 
+     * properly functioning.
+     * 
+     * @see InventoryManagerTest
+     */
     @Test
     public void testEmptyCart(){
         ShoppingCart test = new ShoppingCart();
+        InventoryManager inv = new InventoryManager();
         try {
-            test.initializeCart("inventory.json"); // This is tested elsewhere.
+            inv.initializeStore("D:\\coding\\CST_239_assignment\\inventory.json");
+            test.initializeCart("D:\\coding\\CST_239_assignment\\inventory.json"); // This is tested elsewhere.
             ArrayList<Product> actual = test.getList();
-            test.addToCart(actual, 1, 3); // This is tested elsewhere.
-            test.addToCart(actual, 4, 5); // This is tested elsewhere.
-            test.addToCart(actual, 5, 3); // This is tested elsewhere.
-           // test.emptyCart(actual, test);
+            test.addToCart(inv.inventory, 1, 3); // This is tested elsewhere.
+            test.addToCart(inv.inventory, 4, 5); // This is tested elsewhere.
+            test.addToCart(inv.inventory, 5, 3); // This is tested elsewhere.
+            test.emptyCart(actual, test);
             Assert.assertEquals(0, actual.get(1).getQty());
             Assert.assertEquals(0, actual.get(4).getQty());
             Assert.assertEquals(0, actual.get(5).getQty());
