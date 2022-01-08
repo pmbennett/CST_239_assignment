@@ -104,4 +104,8 @@ public class ShoppingCart {
         }
         System.out.println("Cart emptied.");
     }
+
+    public ArrayList<Product> getList(){
+        return cartQty;
+    }
 }
