@@ -17,19 +17,19 @@ import main.*;
  * @since 1/9/2022
  */
 
-/**
- * A simple test that checks to see if the cart initialization is working by
- * testing to see if the ArrayList is not null.
- * Due to the way the initializeCart method is written in the ShoppingCart
- * class, this test suffices.
- * The assertEquals assertion cannnot be used due to the usage of an ArrayList
- * opposed to a primitive array,
- * and again, this suffices because the initializeCart method pulls from a JSON
- * file to initialize the ArrayList.
- * If the method were not working, the declared test array "actual" in this test
- * method would return null.
- */
 public class ShoppingCartTest {
+    /**
+     * A simple test that checks to see if the cart initialization is working by
+     * testing to see if the ArrayList is not null.
+     * Due to the way the initializeCart method is written in the ShoppingCart
+     * class, this test suffices.
+     * The assertEquals assertion cannnot be used due to the usage of an ArrayList
+     * opposed to a primitive array,
+     * and again, this suffices because the initializeCart method pulls from a JSON
+     * file to initialize the ArrayList.
+     * If the method were not working, the declared test array "actual" in this test
+     * method would return null.
+     */
     @Test
     public void testInitializeCart() {
         ShoppingCart test = new ShoppingCart();
@@ -39,7 +39,7 @@ public class ShoppingCartTest {
             Assert.assertNotNull(actual);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -59,13 +59,19 @@ public class ShoppingCartTest {
      * method. If that test passes but this does not, the problem can be isolated to
      * the method being tested here.
      * 
-     * The shopping cart is dependent on a storefront being initialized, and therefore 
-     * an inventory manager class is created here as well. If the inventory manager 
-     * does not correctly initialize, the test will fail. In the interests of being able 
-     * to isolate the issue, the inventory manager initialization methods and other methods are
-     * tested elsewhere. If this test fails but the initialization test for the inventory 
-     * manager passes, the issue can be isolated to the method being tested here. If all 
-     * tests in the test suite pass, then it can be safely concluded that all methods are 
+     * The shopping cart is dependent on a storefront being initialized, and
+     * therefore
+     * an inventory manager class is created here as well. If the inventory manager
+     * does not correctly initialize, the test will fail. In the interests of being
+     * able
+     * to isolate the issue, the inventory manager initialization methods and other
+     * methods are
+     * tested elsewhere. If this test fails but the initialization test for the
+     * inventory
+     * manager passes, the issue can be isolated to the method being tested here. If
+     * all
+     * tests in the test suite pass, then it can be safely concluded that all
+     * methods are
      * properly functioning.
      * 
      * @see InventoryManagerTest
@@ -80,10 +86,10 @@ public class ShoppingCartTest {
             ArrayList<Product> actual = test.getList();
             test.addToCart(inv.inventory, 2, 3);
             int testVal = actual.get(2).getQty();
-            Assert.assertEquals(3,testVal);
+            Assert.assertEquals(3, testVal);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -104,13 +110,19 @@ public class ShoppingCartTest {
      * If those tests pass but this one does not, the problem can be isolated to
      * the method being tested here.
      * 
-     * The shopping cart is dependent on a storefront being initialized, and therefore 
-     * an inventory manager class is created here as well. If the inventory manager 
-     * does not correctly initialize, the test will fail. In the interests of being able 
-     * to isolate the issue, the inventory manager initialization methods and other methods are
-     * tested elsewhere. If this test fails but the initialization test for the inventory 
-     * manager passes, the issue can be isolated to the method being tested here. If all 
-     * tests in the test suite pass, then it can be safely concluded that all methods are 
+     * The shopping cart is dependent on a storefront being initialized, and
+     * therefore
+     * an inventory manager class is created here as well. If the inventory manager
+     * does not correctly initialize, the test will fail. In the interests of being
+     * able
+     * to isolate the issue, the inventory manager initialization methods and other
+     * methods are
+     * tested elsewhere. If this test fails but the initialization test for the
+     * inventory
+     * manager passes, the issue can be isolated to the method being tested here. If
+     * all
+     * tests in the test suite pass, then it can be safely concluded that all
+     * methods are
      * properly functioning.
      * 
      * @see InventoryManagerTest
@@ -129,28 +141,35 @@ public class ShoppingCartTest {
             Assert.assertEquals(2, testVal);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * This tests the method that is supposed to return all products from the cart to the 
-     * store inventory. Multiple products are used to ensure all return to zero. 
+     * This tests the method that is supposed to return all products from the cart
+     * to the
+     * store inventory. Multiple products are used to ensure all return to zero.
      * 
-     * The shoppng cart is dependent on a storefront being initialized, and therefore 
-     * an inventory manager class is created here as well. If the inventory manager 
-     * does not correctly initialize, the test will fail. In the interests of being able 
-     * to isolate the issue, the inventory manager initialization methods and other methods are
-     * tested elsewhere. If this test fails but the initialization test for the inventory 
-     * manager passes, the issue can be isolated to the method being tested here. If all 
-     * tests in the test suite pass, then it can be safely concluded that all methods are 
+     * The shoppng cart is dependent on a storefront being initialized, and
+     * therefore
+     * an inventory manager class is created here as well. If the inventory manager
+     * does not correctly initialize, the test will fail. In the interests of being
+     * able
+     * to isolate the issue, the inventory manager initialization methods and other
+     * methods are
+     * tested elsewhere. If this test fails but the initialization test for the
+     * inventory
+     * manager passes, the issue can be isolated to the method being tested here. If
+     * all
+     * tests in the test suite pass, then it can be safely concluded that all
+     * methods are
      * properly functioning.
      * 
      * @see InventoryManagerTest
      */
     @Test
-    public void testEmptyCart(){
+    public void testEmptyCart() {
         ShoppingCart test = new ShoppingCart();
         InventoryManager inv = new InventoryManager();
         try {
@@ -167,7 +186,7 @@ public class ShoppingCartTest {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
