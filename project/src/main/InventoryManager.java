@@ -217,7 +217,4 @@ public class InventoryManager {
             }
         }
     }
-
-    public void updateFromAdmin() {
-    }
 }
