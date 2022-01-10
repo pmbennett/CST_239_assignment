@@ -104,7 +104,10 @@ public class ShoppingCart {
         }
         System.out.println("Cart emptied.");
     }
-
+    /**
+     * Getter for the ArrayList representing cart inventory. 
+     * @return Inventory for 
+     */
     public ArrayList<Product> getList(){
         return cartQty;
     }
