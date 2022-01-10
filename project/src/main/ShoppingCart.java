@@ -106,7 +106,7 @@ public class ShoppingCart {
     }
     /**
      * Getter for the ArrayList representing cart inventory. 
-     * @return Inventory for 
+     * @return Inventory for the shopping cart. 
      */
     public ArrayList<Product> getList(){
         return cartQty;
