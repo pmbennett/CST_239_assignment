@@ -4,9 +4,9 @@
     ],
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "jackson-annotations-2.13.0.jar",
-        "jackson-core-2.13.0.jar",
-        "jackson-databind-2.13.0.jar",
-        "junit-platform-console-standalone-1.7.0-M1.jar"
+        "project\\lib\\jackson-annotations-2.13.0.jar\\*",
+        "project\\lib\\jackson-core-2.13.0.jar\\*",
+        "project\\lib\\junit-platform-console-standalone-1.7.0-M1.jar\\*",
+        "project\\lib\\jackson-databind-2.13.0.jar"
     ]
 }

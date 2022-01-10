@@ -15,28 +15,28 @@
             "type": "java",
             "name": "Launch AdminApp",
             "request": "launch",
-            "mainClass": "AdminApp",
+            "mainClass": "main.AdminApp",
             "projectName": "CST_239_assignment_a957b"
         },
         {
             "type": "java",
             "name": "Launch AdminClient",
             "request": "launch",
-            "mainClass": "AdminClient",
+            "mainClass": "main.AdminClient",
             "projectName": "CST_239_assignment_a957b"
         },
         {
             "type": "java",
             "name": "Launch AdminService",
             "request": "launch",
-            "mainClass": "AdminService",
+            "mainClass": "main.AdminService",
             "projectName": "CST_239_assignment_a957b"
         },
         {
             "type": "java",
             "name": "Launch Storefront",
             "request": "launch",
-            "mainClass": "Storefront",
+            "mainClass": "main.Storefront",
             "projectName": "CST_239_assignment_a957b"
         }
     ]
@@ -47,7 +47,7 @@
             "configurations": ["Launch AdminApp","Launch AdminClient","Launch Storefront"]
         },
         {
-            "name": "Sever test",
+            "name": "Server test",
             "configurations": ["Launch AdminApp", "Launch AdminClient"]
         }
     ]
